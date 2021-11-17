@@ -1,11 +1,11 @@
-package com.example.moneymanager.responses;
+package com.example.moneymanager.test.payload.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class StringResponse {
+public class MessageResponse {
     private final boolean success;
     private final String message;
 }

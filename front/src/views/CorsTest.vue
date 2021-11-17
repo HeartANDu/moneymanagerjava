@@ -16,7 +16,7 @@ export default {
     },
     methods: {
         getMessage() {
-            axios.get('message')
+            this.$http.get('message')
                 .then(response => {
                     this.message = response.data.message;
                 });
