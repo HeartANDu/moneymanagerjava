@@ -1,0 +1,39 @@
+version: '3.6'
+services:
+  app:
+    image: maven:3.6.3-openjdk-11-slim
+    volumes:
+      - ./app:/app:delegated
+    working_dir: /app
+    entrypoint: mvn spring-boot:run
+    env_file:
+      - .env
+    ports:
+      - "${APP_PORT}:8001"
+    depends_on:
+      - postgres
+
+  front:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+      target: front
+    volumes:
+      - ./front:/app:delegated
+    entrypoint: npm run serve
+    ports:
+      - "${FRONT_PORT}:8000"
+
+  postgres:
+    image: postgres:13.4
+    volumes:
+      - mmdb-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "${PG_PORT}:5432"
+
+volumes:
+  mmdb-data:
