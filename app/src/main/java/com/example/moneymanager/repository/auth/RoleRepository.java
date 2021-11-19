@@ -1,6 +1,6 @@
-package com.example.moneymanager.security.repository;
+package com.example.moneymanager.repository.auth;
 
-import com.example.moneymanager.security.models.Role;
+import com.example.moneymanager.models.auth.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

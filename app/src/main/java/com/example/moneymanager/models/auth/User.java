@@ -1,4 +1,4 @@
-package com.example.moneymanager.security.models;
+package com.example.moneymanager.models.auth;
 
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -11,11 +11,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity
-@Table(name = "users", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "email"),
-        @UniqueConstraint(columnNames = "name")
-})
+@Entity(name = "users")
 @Getter
 @Setter
 @ToString
@@ -26,15 +22,18 @@ public class User {
 
     @NotBlank
     @Size(max = 50)
-    private String name;
+    @Column(unique = true, nullable = false)
+    private String username;
 
     @NotBlank
     @Size(max = 100)
     @Email
+    @Column(unique = true, nullable = false)
     private String email;
 
     @NotBlank
     @Size(max = 120)
+    @Column(nullable = false)
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -47,8 +46,8 @@ public class User {
     public User() {
     }
 
-    public User(String name, String email, String password) {
-        this.name = name;
+    public User(String username, String email, String password) {
+        this.username = username;
         this.email = email;
         this.password = password;
     }

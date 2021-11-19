@@ -1,7 +1,7 @@
 package com.example.moneymanager.security.config;
 
-import com.example.moneymanager.security.jwt.AuthEntryPointJwt;
-import com.example.moneymanager.security.jwt.AuthTokenFilter;
+import com.example.moneymanager.security.auth.AuthEntryPointJwt;
+import com.example.moneymanager.security.auth.AuthTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/auth/**").permitAll()
+                .authorizeRequests().antMatchers("/auth/login", "/auth/register").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

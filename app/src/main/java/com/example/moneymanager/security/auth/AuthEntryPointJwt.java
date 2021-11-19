@@ -1,4 +1,4 @@
-package com.example.moneymanager.security.jwt;
+package com.example.moneymanager.security.auth;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

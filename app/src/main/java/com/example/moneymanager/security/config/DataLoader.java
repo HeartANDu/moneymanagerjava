@@ -1,7 +1,7 @@
 package com.example.moneymanager.security.config;
 
-import com.example.moneymanager.security.models.Role;
-import com.example.moneymanager.security.repository.RoleRepository;
+import com.example.moneymanager.models.auth.Role;
+import com.example.moneymanager.repository.auth.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

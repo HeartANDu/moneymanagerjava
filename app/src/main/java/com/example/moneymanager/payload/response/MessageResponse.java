@@ -1,4 +1,4 @@
-package com.example.moneymanager.security.payload.response;
+package com.example.moneymanager.payload.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.example.moneymanager.security.payload.request;
+package com.example.moneymanager.payload.request;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-public class SignupRequest {
+public class RegisterRequest {
     @NotBlank
     @Size(min = 3, max = 50)
     private String username;

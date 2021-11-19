@@ -1,6 +1,6 @@
-package com.example.moneymanager.security.repository;
+package com.example.moneymanager.repository.auth;
 
-import com.example.moneymanager.security.models.User;
+import com.example.moneymanager.models.auth.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,9 +8,9 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByName(String name);
+    Optional<User> findByUsername(String username);
 
-    Boolean existsByName(String name);
+    Boolean existsByUsername(String username);
 
     Boolean existsByEmail(String email);
 }

@@ -1,4 +1,4 @@
-package com.example.moneymanager.security.jwt;
+package com.example.moneymanager.security.config;
 
 import lombok.Getter;
 import lombok.Setter;

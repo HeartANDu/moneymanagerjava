@@ -1,4 +1,4 @@
-package com.example.moneymanager.security.models;
+package com.example.moneymanager.models.auth;
 
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -6,8 +6,7 @@ import org.hibernate.Hibernate;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "roles")
+@Entity(name = "roles")
 @Getter
 @Setter
 @ToString
@@ -17,7 +16,7 @@ public class Role {
     private Integer id;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 20)
+    @Column(length = 20, nullable = false)
     private Roles name;
 
     public Role() {

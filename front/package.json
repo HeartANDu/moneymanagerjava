@@ -7,10 +7,15 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@mdi/font": "^6.5.95",
+    "@websanova/vue-auth": "^4.1.6",
     "axios": "^0.24.0",
     "core-js": "^3.6.5",
+    "lodash": "^4.17.21",
     "vue": "^2.6.11",
+    "vue-axios": "^3.4.0",
     "vue-router": "^3.2.0",
+    "vue-toasted": "^1.1.28",
     "vuetify": "^2.6.0",
     "vuex": "^3.4.0"
   },
