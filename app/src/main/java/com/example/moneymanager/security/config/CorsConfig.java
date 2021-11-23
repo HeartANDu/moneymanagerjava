@@ -1,14 +1,12 @@
 package com.example.moneymanager.security.config;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@Configuration
-public class CorsConfig implements WebMvcConfigurer {
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("http://localhost:8000");
-    }
+@ConfigurationProperties(prefix = "moneymanager.app.cors")
+@Getter
+@Setter
+public class CorsConfig {
+    private String allowedOrigin;
 }

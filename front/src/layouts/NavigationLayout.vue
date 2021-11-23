@@ -41,8 +41,7 @@ export default {
         return {
             links: [
                 {to: '/', name: 'Home'},
-                {to: '/about', name: 'About'},
-                {to: '/cors-test', name: 'Cors Test'},
+                {to: '/accounts', name: 'Accounts'},
             ],
         };
     },
