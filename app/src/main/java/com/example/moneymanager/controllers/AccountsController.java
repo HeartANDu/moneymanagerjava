@@ -59,13 +59,15 @@ public class AccountsController {
     @PreAuthorize("#account == null || #account.user.id == authentication.principal.id")
     public Account updateAccount(
             @PathVariable(name = "id", required = false) Account account,
-            @Valid @RequestBody CreateOrUpdateAccountRequest request
+            @Valid @RequestBody CreateOrUpdateAccountRequest request,
+            Authentication authentication
     ) {
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         AccountType accountType = accountTypeRepository.findById(request.getAccountTypeId())
                 .orElseThrow(() -> new EntityNotFoundException("Account type not found"));
 
         if (account == null) {
-            account = new Account();
+            account = new Account(entityManager.getReference(User.class, userDetails.getId()));
         }
 
         account.setName(request.getName());

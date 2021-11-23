@@ -16,7 +16,7 @@ public class AccountTypesController {
     private AccountTypeRepository accountTypeRepository;
 
     @GetMapping
-    public List<AccountType> list() {
+    public List<AccountType> getAccountTypes() {
         return accountTypeRepository.findAll();
     }
 }

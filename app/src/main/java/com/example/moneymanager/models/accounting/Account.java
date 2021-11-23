@@ -36,6 +36,10 @@ public class Account extends TimestampedEntity {
     @Column(nullable = false, precision = 2)
     private BigDecimal balance;
 
+    public Account(User user) {
+        this.user = user;
+    }
+
     public Account(String name, AccountType accountType, User user, BigDecimal balance) {
         this.name = name;
         this.accountType = accountType;

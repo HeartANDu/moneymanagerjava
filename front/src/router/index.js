@@ -18,6 +18,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "accounts" */ '../views/Accounts.vue')
   },
   {
+    meta: {auth: true},
+    path: '/transaction-types',
+    name: 'Transaction Types',
+    component: () => import(/* webpackChunkName: "transaction-types" */ '../views/TransactionTypes.vue')
+  },
+  {
     meta:  {auth: false},
     path: '/login',
     name: 'Login',

@@ -2,6 +2,7 @@ package com.example.moneymanager.models.accounting;
 
 import com.example.moneymanager.accounting.TransactionAction;
 import com.example.moneymanager.models.auth.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -24,10 +25,15 @@ public class TransactionType {
     private String name;
 
     @ManyToOne
+    @JsonIgnore
     private User user;
 
     @Column(nullable = false, length = 10)
     private TransactionAction action;
+
+    public TransactionType(User user) {
+        this.user = user;
+    }
 
     public TransactionType(String name, User user, TransactionAction action) {
         this.name = name;

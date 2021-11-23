@@ -1,6 +1,6 @@
 package com.example.moneymanager.payload.request;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.example.moneymanager.accounting.TransactionAction;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,12 +10,11 @@ import javax.validation.constraints.Size;
 
 @Getter
 @Setter
-public class CreateOrUpdateAccountRequest {
+public class CreateOrUpdateTransactionTypeRequest {
     @NotBlank
-    @Size(max = 100)
+    @Size(max = 50)
     private String name;
 
-    @NotNull(message = "Type should be specified")
-    @JsonProperty("account_type_id")
-    private Integer accountTypeId;
+    @NotNull
+    private TransactionAction action;
 }

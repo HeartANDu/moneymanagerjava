@@ -3,10 +3,6 @@
                   :items="data"
                   :loading="loading"
     >
-        <template v-slot:footer.prepend>
-            <create-update-account-dialog ref="cruDialog" @refresh="load" />
-            <delete-account-dialog ref="deleteDialog" @refresh="load" />
-        </template>
         <template v-slot:item.actions="{item}">
             <v-icon small
                     @click="showEditDialog(item)"
@@ -19,42 +15,46 @@
                 mdi-delete
             </v-icon>
         </template>
+        <template v-slot:footer.prepend>
+            <create-update-type-dialog ref="cruDialog" @refresh="load" />
+            <delete-type-dialog ref="deleteDialog" @refresh="load" />
+        </template>
     </v-data-table>
 </template>
 
 <script>
-import CreateUpdateAccountDialog from "@/components/Accounts/CreateUpdateAccountDialog";
-import DeleteAccountDialog from "@/components/Accounts/DeleteAccountDialog";
+import CreateUpdateTypeDialog from "@/components/TransactionTypes/CreateUpdateTypeDialog";
+import DeleteTypeDialog from "@/components/TransactionTypes/DeleteTypeDialog";
 
 export default {
-    name: "AccountsList",
-    components: {DeleteAccountDialog, CreateUpdateAccountDialog},
+    name: "TypesList",
+    components: {DeleteTypeDialog, CreateUpdateTypeDialog},
     data() {
         return {
             loading: false,
             data: [],
             headers: [
-                {text: 'Account name', value: 'name'},
-                {text: 'Current balance', value: 'balance'},
-                {text: 'Account type', value: 'account_type.name'},
+                {text: 'Type Name', value: 'name'},
+                {text: 'Type Action', value: 'action'},
                 {text: 'Actions', value: 'actions', sortable: false},
             ],
         };
     },
     methods: {
+        showEditDialog(item) {
+            this.$refs.cruDialog.showDialog(item);
+        },
+        showDeleteDialog(item) {
+            this.$refs.deleteDialog.showDialog(item);
+        },
         load() {
-            this.$http.get("/accounts")
+            this.loading = true;
+            this.$http.get('/transaction-types')
                 .then(response => {
                     this.data = response.data;
                 })
                 .catch(this.$root.responseError)
                 .finally(() => this.loading = false);
-        },
-        showEditDialog(item) {
-            this.$refs.cruDialog.showEditDialog(item);
-        },
-        showDeleteDialog(item) {
-            this.$refs.deleteDialog.showDialog(item);
         },
     },
     mounted() {

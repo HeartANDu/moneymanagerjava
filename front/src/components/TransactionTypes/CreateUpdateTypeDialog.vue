@@ -3,7 +3,7 @@
         <template v-slot:activator="{on, attrs}">
             <v-btn color="primary"
                    v-bind="attrs"
-                   @click="showEditDialog()"
+                   @click="showDialog()"
             >
                 Create
             </v-btn>
@@ -11,21 +11,19 @@
 
         <v-card>
             <v-card-title>
-                {{ actionText }} account
+                {{ actionText }} transaction type
             </v-card-title>
 
             <v-card-text>
                 <v-form ref="form">
                     <v-text-field label="Name"
-                                  v-model="account.name"
+                                  v-model="type.name"
                                   required
                     />
 
-                    <v-select label="Account Type"
-                              :items="accountTypes"
-                              v-model="account.accountType"
-                              item-text="name"
-                              item-value="id"
+                    <v-select label="Action Type"
+                              :items="transactionActions"
+                              v-model="type.action"
                     />
                 </v-form>
             </v-card-text>
@@ -35,7 +33,7 @@
             <v-card-actions>
                 <v-btn color="default"
                        text
-                       @click="show = false"
+                       @click="hideDialog"
                 >
                     Close
                 </v-btn>
@@ -54,62 +52,73 @@
 <script>
 import {clone} from 'lodash';
 
-const DEFAULT_ACCOUNT = {
+const DEFAULT_TYPE = {
     id: null,
     name: null,
-    accountType: null,
+    action: null,
 };
 
+const URL = '/transaction-types';
+
 export default {
-    name: "CreateUpdateAccountDialog",
+    name: "CreateUpdateTypeDialog",
     computed: {
         actionText() {
-            return this.account.id ? 'Edit' : 'Create';
+            return this.type?.id ? 'Edit' : 'Create';
         },
-        accountTypes() {
-            return this.$store.state.accountTypes.items;
+        transactionActions() {
+            return this.$store.state.transactionActions.items;
         },
     },
     data() {
         return {
             show: false,
-            account: clone(DEFAULT_ACCOUNT),
+            type: clone(DEFAULT_TYPE),
         };
     },
     methods: {
         reset() {
-            this.account = clone(DEFAULT_ACCOUNT);
+            this.type = clone(DEFAULT_TYPE);
         },
-        initAccount(account) {
-            if (!account) {
+        initType(type) {
+            if (!type) {
                 this.reset();
             } else {
-                this.account.id = account.id;
-                this.account.name = account.name;
-                this.account.accountType = account.account_type.id;
+                this.type.id = type.id;
+                this.type.name = type.name;
+                this.type.action = type.action;
             }
         },
-        showEditDialog(account) {
+        showDialog(type) {
             this.show = true;
-            this.initAccount(account);
+            this.initType(type);
         },
+        hideDialog() {
+            this.show = false;
+        },
+
         save() {
             this.loading = true;
 
-            let id = this.account.id;
-            let data = {name: this.account.name, account_type_id: this.account.accountType};
-            this.$http.request({method: id ? 'put' : 'post', url: id ? `/accounts/${id}` : '/accounts', data})
+            let id = this.type.id;
+            let data = {
+                name: this.type.name,
+                action: this.type.action,
+            };
+            let url = id ? URL + `/${id}` : URL;
+
+            this.$http.request({method: id ? 'put' : 'post', url, data})
                 .then(() => {
-                    this.$root.success('Account added successfully');
+                    this.$root.success('Transaction type save successfully');
                     this.$emit('refresh');
-                    this.show = false;
+                    this.hideDialog();
                 })
                 .catch(this.$root.responseError)
                 .finally(() => this.loading = false);
         },
     },
     mounted() {
-        this.$store.dispatch('accountTypes/init');
+        this.$store.dispatch('transactionActions/init');
     },
 }
 </script>

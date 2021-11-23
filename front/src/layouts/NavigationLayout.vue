@@ -42,6 +42,7 @@ export default {
             links: [
                 {to: '/', name: 'Home'},
                 {to: '/accounts', name: 'Accounts'},
+                {to: '/transaction-types', name: 'Transaction Types'},
             ],
         };
     },
