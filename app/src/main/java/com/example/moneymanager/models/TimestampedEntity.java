@@ -17,7 +17,7 @@ public abstract class TimestampedEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     protected Long id;
     @JsonProperty("created_at")
-    protected Instant cratedAt;
+    protected Instant createdAt;
     @JsonProperty("updated_at")
     protected Instant updatedAt;
 }

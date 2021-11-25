@@ -4,8 +4,8 @@
                   :loading="loading"
     >
         <template v-slot:footer.prepend>
-            <create-update-account-dialog ref="cruDialog" @refresh="load" />
-            <delete-account-dialog ref="deleteDialog" @refresh="load" />
+            <create-update-account-dialog ref="cruDialog" @refresh="onRefresh" />
+            <delete-account-dialog ref="deleteDialog" @refresh="onRefresh" />
         </template>
         <template v-slot:item.actions="{item}">
             <v-icon small
@@ -42,6 +42,10 @@ export default {
         };
     },
     methods: {
+        onRefresh() {
+            this.$store.dispatch('accounts/invalidate');
+            this.load();
+        },
         load() {
             this.$http.get("/accounts")
                 .then(response => {

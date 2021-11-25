@@ -14,7 +14,7 @@ public class TimestampedEntityListener {
         entity.setUpdatedAt(now);
 
         if (entity.getId() == null) {
-            entity.setCratedAt(now);
+            entity.setCreatedAt(now);
         }
     }
 }

@@ -16,8 +16,8 @@
             </v-icon>
         </template>
         <template v-slot:footer.prepend>
-            <create-update-type-dialog ref="cruDialog" @refresh="load" />
-            <delete-type-dialog ref="deleteDialog" @refresh="load" />
+            <create-update-type-dialog ref="cruDialog" @refresh="onRefresh" />
+            <delete-type-dialog ref="deleteDialog" @refresh="onRefresh" />
         </template>
     </v-data-table>
 </template>
@@ -41,6 +41,10 @@ export default {
         };
     },
     methods: {
+        onRefresh() {
+            this.$store.dispatch('transactionTypes/invalidate');
+            this.load();
+        },
         showEditDialog(item) {
             this.$refs.cruDialog.showDialog(item);
         },

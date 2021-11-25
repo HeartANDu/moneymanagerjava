@@ -4,15 +4,14 @@ import router from './router';
 import store from './store';
 import vuetify from '@/plugins/vuetify';
 import Toasted from 'vue-toasted';
-import Vuelidate from 'vuelidate';
 import '@mdi/font/css/materialdesignicons.css';
+import '@/styles/app.scss';
 
 require('@/plugins/axios');
 require('@/plugins/auth');
 
 Vue.config.productionTip = false;
 Vue.use(Toasted);
-Vue.use(Vuelidate);
 
 new Vue({
   router,
@@ -50,6 +49,9 @@ new Vue({
       } else {
         this.error('Unknown Error');
       }
+    },
+    confirm(title, message, confirm, deny) {
+      this.$children[0].showConfirmDialog(title, message, confirm, deny);
     },
   }
 }).$mount('#app');

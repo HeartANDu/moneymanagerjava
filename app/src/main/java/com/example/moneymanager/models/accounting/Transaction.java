@@ -3,6 +3,7 @@ package com.example.moneymanager.models.accounting;
 import com.example.moneymanager.accounting.TransactionAction;
 import com.example.moneymanager.models.TimestampedEntity;
 import com.example.moneymanager.models.auth.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -24,14 +25,14 @@ public class Transaction extends TimestampedEntity {
     @Column(nullable = false, length = 10)
     private TransactionAction action;
 
-    @Column(nullable = false, precision = 2)
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal amount;
 
-    @Column(nullable = false)
     private String comment;
 
     @ManyToOne
     @JoinColumn(nullable = false)
+    @JsonIgnore
     private User user;
 
     @ManyToOne
@@ -42,7 +43,8 @@ public class Transaction extends TimestampedEntity {
     @JoinColumn(nullable = false)
     private Account account;
 
-    public Transaction(TransactionAction action, BigDecimal amount, String comment, User user, TransactionType type, Account account) {
+    public Transaction(Date date, TransactionAction action, BigDecimal amount, String comment, User user, TransactionType type, Account account) {
+        this.date = date;
         this.action = action;
         this.amount = amount;
         this.comment = comment;

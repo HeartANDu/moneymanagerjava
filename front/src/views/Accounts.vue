@@ -1,6 +1,6 @@
 <template>
     <main-layout>
-        <h1 style="margin-bottom: 15px;">Accounts</h1>
+        <h1 class="route-title">Accounts</h1>
 
         <accounts-list />
     </main-layout>

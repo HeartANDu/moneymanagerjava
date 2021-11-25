@@ -1,3 +1,3 @@
 import basicStore from './basic-store';
 
-export default basicStore("/accounting/actions");
+export default basicStore("/transactions/actions");

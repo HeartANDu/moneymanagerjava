@@ -1,6 +1,6 @@
 <template>
     <main-layout>
-        <h1 style="margin-bottom: 15px;">Transaction Types</h1>
+        <h1 class="route-title">Transaction Types</h1>
 
         <types-list />
     </main-layout>

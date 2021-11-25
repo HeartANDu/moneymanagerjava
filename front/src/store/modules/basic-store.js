@@ -32,6 +32,10 @@ export default function (path) {
             getItems({getters}, {params = {}}) {
                 return axios.get(getters.url, {params});
             },
+            invalidate({commit}) {
+                commit('setInitialized', false);
+                commit('setItems', []);
+            },
             init({commit, dispatch, state}, payload = {}) {
                 return new Promise((resolve, reject) => {
                     if (!state.initialized || payload.force) {

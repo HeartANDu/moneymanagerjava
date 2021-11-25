@@ -33,7 +33,7 @@ public class Account extends TimestampedEntity {
     @JsonIgnore
     private User user;
 
-    @Column(nullable = false, precision = 2)
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal balance;
 
     public Account(User user) {

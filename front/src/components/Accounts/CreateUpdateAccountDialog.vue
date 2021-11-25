@@ -100,7 +100,7 @@ export default {
             let data = {name: this.account.name, account_type_id: this.account.accountType};
             this.$http.request({method: id ? 'put' : 'post', url: id ? `/accounts/${id}` : '/accounts', data})
                 .then(() => {
-                    this.$root.success('Account added successfully');
+                    this.$root.success('Account saved successfully');
                     this.$emit('refresh');
                     this.show = false;
                 })

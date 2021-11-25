@@ -109,7 +109,7 @@ export default {
 
             this.$http.request({method: id ? 'put' : 'post', url, data})
                 .then(() => {
-                    this.$root.success('Transaction type save successfully');
+                    this.$root.success('Transaction type saved successfully');
                     this.$emit('refresh');
                     this.hideDialog();
                 })
